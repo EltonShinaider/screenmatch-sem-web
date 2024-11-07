@@ -3,10 +3,7 @@ package shinaider.elton.screenmatch;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import shinaider.elton.screenmatch.model.DadosEpisodio;
-import shinaider.elton.screenmatch.model.DadosSerie;
-import shinaider.elton.screenmatch.service.ConsumoApi;
-import shinaider.elton.screenmatch.service.ConverteDados;
+import shinaider.elton.screenmatch.principal.Principal;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -17,15 +14,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var consumoApi = new ConsumoApi();
-		var json  = consumoApi.obterDados("http://www.omdbapi.com/?t=gilmore+girls&apikey=76d9579f");
-		System.out.println(json);
-		ConverteDados conversor = new ConverteDados();
-		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-		System.out.println(dados);
-		json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=76d9579f");
-		DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
-		System.out.println(dadosEpisodio);
+		Principal principal = new Principal();
+		principal.exibeMenu();
 	}
-
 }
